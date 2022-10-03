@@ -1,3 +1,7 @@
+completed sec.2 routing 10/03
+
+Will make branches for each section. 
+
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
