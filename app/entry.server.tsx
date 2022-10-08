@@ -1,8 +1,8 @@
-import { PassThrough } from "stream";
-import type { EntryContext } from "@remix-run/node";
-import { Response } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import { renderToPipeableStream } from "react-dom/server";
+import { PassThrough } from 'stream';
+import type { EntryContext } from '@remix-run/node';
+import { Response } from '@remix-run/node';
+import { RemixServer } from '@remix-run/react';
+import { renderToPipeableStream } from 'react-dom/server';
 
 const ABORT_DELAY = 5000;
 
@@ -13,7 +13,6 @@ export default function handleRequest(
   remixContext: EntryContext
 ) {
   return new Promise((resolve, reject) => {
-    console.log('imfirst!')
     // entry.client.tsx에서 내용을 가져와서 streamString으로 쪼갠 되, pipe로 나누어서 response를 준다.
     let didError = false;
 
@@ -23,7 +22,7 @@ export default function handleRequest(
         onShellReady: () => {
           const body = new PassThrough();
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set('Content-Type', 'text/html');
 
           resolve(
             new Response(body, {

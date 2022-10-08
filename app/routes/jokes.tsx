@@ -34,7 +34,7 @@ export const loader: LoaderFunction = async () => {
     // 시퀄라이즈 문법 그대로 사용 가능하므로,
     jokeListItems: await db.joke.findMany({
       // 5개만 받기
-      take: 5,
+      // take: 5,
       select: { id: true, name: true },
       orderBy: { createdAt: 'desc' },
     }),

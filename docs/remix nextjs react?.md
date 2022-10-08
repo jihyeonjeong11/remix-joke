@@ -8,7 +8,6 @@ https://www.smashingmagazine.com/2022/07/look-remix-differences-next/
 
 NextJS는 이미 유명함.
 
-
 ## Remix란 무엇인가?
 
 리믹스는 edge-first full stack framework
@@ -17,19 +16,18 @@ NextJS는 이미 유명함.
 
 nextJS와 마찬가지로 csr, ssr을 선택가능
 
-Web Fetch API를 기반으로 만들어짐. 
+Web Fetch API를 기반으로 만들어짐.
 
 SSR 방식. 서버에 요청 올때마다 html을 만들어 내려줌
 SSG 방식.(server side에서 이미 html을 만들어 놓고, 요청이 올때마다 내려주는 것.)
 
 둘다 javascript 다운로드량을 줄일 수 있어서 속도에 도움 됨.
 
-
 ## 리믹스 메인 기능.
 
 Routes
 다른 react 기반 framework처럼 Remix도 JS/TS를 통한 라우팅 제공.
-react-router를 사용한다. 
+react-router를 사용한다.
 
 nested components
 nested page와 component가 가능하다.
@@ -44,7 +42,7 @@ Forms
 
 Loaders & Actions
 리믹스는 Loader와 Action이라는 두 가지 펑션을 제공한다. Server Side dynamic content에 사용된다.
-loader는 get 리퀘스트, action은 post, put, delete, patch에 사용됨. 
+loader는 get 리퀘스트, action은 post, put, delete, patch에 사용됨.
 
 ## NextJS는 어떰?
 
@@ -58,18 +56,18 @@ Nextjs는 그대로 react를 사용한다.
 
 #### ssr
 
-둘 다 SSR을 위해 개발되었다. 
+둘 다 SSR을 위해 개발되었다.
 둘 다 React 기반이니까 client-side hydration도 가능하다.
 
 #### SSG
 
 Next는 SSG를 제공한다.
 리믹스는 현재 그렇지 않음.
-SSG는 빌드 타임에서(서버에서 일어나는) fetch data와 render가 일어나는 것으로, 
+SSG는 빌드 타임에서(서버에서 일어나는) fetch data와 render가 일어나는 것으로,
 
 하지만 SSG는 문제가 될 수 있음.
 페이지의 변화가 일어날 경우에는 static aseet을 준비하기 위해 다른 빌드가 일어나야 한다는 것이다.
-** 이것을 막기 위해 NextJS에서는 Incremental Static Regeneration(ISR)과 On demand ISR을 준비중에 있다. ** 
+** 이것을 막기 위해 NextJS에서는 Incremental Static Regeneration(ISR)과 On demand ISR을 준비중에 있다. **
 
 #### STALE WHILD REVALIDATE
 
@@ -96,7 +94,7 @@ Remix는 html 태그에 <link rel="prefetch">로 직접 넣어줘서 위 기능�
 
 이건 뭐지?
 
-서버에 어떤 content를 fetching 할 때 그 브라우저에서  해당 코드를 실행할 서버가 얼마나 멀리 있는지를 생각해야 함.
+서버에 어떤 content를 fetching 할 때 그 브라우저에서 해당 코드를 실행할 서버가 얼마나 멀리 있는지를 생각해야 함.
 
 만약 서버는 브라질, 브라우저는 중국이라면 더 늦어질 것이므로,
 
@@ -117,33 +115,27 @@ Remix는 native HTTP methods를 통해 데이터를 managing하고, 이는 loade
 
 post는 form에서 serialized 데이터를 보내고, server-side에서는 new page를 응답으로 내려준다. 이것이 Web Standard이다.
 
-
 리믹스는 Form 이라는 빌트인 엘리먼트를 가진다. html form과 유사하며 action 펑션으로 클라이언트와 서버 코드를 한 파일에서 핸들링한다.
 
 이 때 remix가 state나 context는 신경쓰지 않도록 처리해준다(?)
 
 NextJS에서는 반대로
 
-JS에서 state로 처리함. 
+JS에서 state로 처리함.
 
-
-
-API Call -> revalidate  data-> interface 업데이트가 됨.
+API Call -> revalidate data-> interface 업데이트가 됨.
 
 https://nextjs.org/docs/api-routes/introduction
-이는 API ROutes라는 기능으로 서버 사이드의 로직을 정의하는 파일에서 정의 가능하다.
+이는 API Routes라는 기능으로 서버 사이드의 로직을 정의하는 파일에서 정의 가능하다.
 
 따라서 NextJS보다는 Remix가 더 Web standard에 적합하다고 이 사이트에서는 평가함.
 
-
-###  NODE.JS DEPENDENCY #
+### NODE.JS DEPENDENCY
 
 리믹스는 fetch API 기반이기 떄문에 node 기반에 사용하는 것이 아니라(vercel, netlify), 다른 언어 기반에서도 사용 가능함(Cloudflare workers or new Deno Deploy)
 
-NextJS는 최신 버전 기준으로(12,2) Edge runtine과 Nodejs runtime  중 선택가능
-
+NextJS는 최신 버전 기준으로(12,2) Edge runtine과 Nodejs runtime 중 선택가능
 
 ### 결론
 
 Remix는 오픈소스가 된지 얼마 안되었고 하지만 커뮤니티가 빠르게 확장되고 있다. 충분히 미래가 기대되는 프레임워크이다.
-
