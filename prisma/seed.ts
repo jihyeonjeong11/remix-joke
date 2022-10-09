@@ -4,9 +4,19 @@ const db = new PrismaClient();
 // 해당 코드의 문제는, server side 코드 변경시마다 db 연결을 새로 해야한다는 것임. 따라서 바꿔줘야함. next에서도 똑같은 문제임.
 
 async function seed() {
+  const kody = await db.user.create({
+    data: {
+      username: 'kody',
+      // this is a hashed version of "twixrox"
+      passwordHash:
+        '$2b$10$K7L1OJ45/4Y2nIvhRVpCe.FSmhDdWoXehVzJptJ/op0lSsvqNu/1u',
+    },
+  });
+
   await Promise.all(
     getJokes().map((joke) => {
-      return db.joke.create({ data: joke });
+      const data = { jokesterId: kody.id, ...joke };
+      return db.joke.create({ data });
     })
   );
 }

@@ -3,6 +3,7 @@ import { redirect, json } from '@remix-run/node';
 import { useActionData } from '@remix-run/react';
 
 import { db } from '~/utils/db.server';
+import { requireUserId } from '~/utils/session.server';
 
 function validateJokeContent(content: string) {
   if (content.length < 10) {
@@ -25,12 +26,14 @@ type ActionData = {
   fields?: {
     name: string;
     content: string;
+    jokesterId: string;
   };
 };
 
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request);
   const form = await request.formData();
   const name = form.get('name');
   const content = form.get('content');
@@ -55,7 +58,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest({ fieldErrors, fields });
   }
-  const joke = await db.joke.create({ data: fields });
+  const joke = await db.joke.create({ ...fields, jokesterId: userId });
   return redirect(`/jokes/${joke.id}`);
 };
 
