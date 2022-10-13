@@ -52,6 +52,7 @@ type ActionData = {
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
+  //throw new Error('testing error')
   const form = await request.formData();
   const loginType = form.get('loginType');
   const username = form.get('username');
