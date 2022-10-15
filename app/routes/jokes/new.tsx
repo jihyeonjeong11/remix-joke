@@ -1,9 +1,10 @@
 import type { ActionFunction, LoaderFunction } from '@remix-run/node';
 import { redirect, json } from '@remix-run/node';
-import { useActionData, useCatch, Link } from '@remix-run/react';
+import { useActionData, useCatch, Link, useTransition } from '@remix-run/react';
 
 import { db } from '~/utils/db.server';
 import { requireUserId, getUserId } from '~/utils/session.server';
+import { JokeDisplay } from '~/components/joke';
 
 export const loader: LoaderFunction = async ({
   request,
@@ -64,16 +65,37 @@ export const action: ActionFunction = async ({ request }) => {
     name: validateJokeName(name),
     content: validateJokeContent(content),
   };
-  const fields = { name, content };
+  const fields = { name, content, jokesterId: userId };
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest({ fieldErrors, fields });
   }
-  const joke = await db.joke.create({ ...fields, jokesterId: userId });
+  const joke = await db.joke.create({data:{ ...fields, jokesterId: userId } });
   return redirect(`/jokes/${joke.id}`);
 };
 
 export default function NewJokeRoute() {
   const actionData = useActionData<ActionData>();
+  const transition = useTransition();
+
+  if (transition.submission) {
+    const name = transition.submission.formData.get("name");
+    const content =
+      transition.submission.formData.get("content");
+    if (
+      typeof name === "string" &&
+      typeof content === "string" &&
+      !validateJokeContent(content) &&
+      !validateJokeName(name)
+    ) {
+      return (
+        <JokeDisplay
+          joke={{ name, content }}
+          isOwner={true}
+          canDelete={false}
+        />
+      );
+    }
+  }
 
   return (
     <div>

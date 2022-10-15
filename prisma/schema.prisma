@@ -16,7 +16,7 @@ model Joke {
   updatedAt  DateTime @updatedAt
   name       String
   content    String
-  jokester   User?    @relation(fields: [jokesterId], references: [id], onDelete: Cascade)
+  jokester   User    @relation(fields: [jokesterId], references: [id], onDelete: Cascade)
   jokesterId String
 }
 
